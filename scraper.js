@@ -2,42 +2,33 @@ var request = require("request");
 var cheerio = require("cheerio");
 var fs = require('fs');
 
-var url = 'https://www.linkedin.com/in/sunshineyin';
-// var url = 'https://www.linkedin.com/in/ethanrosenberg';
 
-// var url = 'https://www.linkedin.com/profile/view?id=412960964'
+var linkedInUrl = 'https://www.linkedin.com/in/anselrosenberg';
+// var url = 'https://www.linkedin.com/profile/view?id=412960964';
 
-   // "http://www.wunderground.com/cgi-bin/findweather/getForecast?&query=" + 94102;
-
-   var url = 'https://api.angel.co/1/tags/14781/jobs?&access_token=c5f37bb9913b8bce889b16dc62ddb51ff2200a4ba38a1c13'
+var angelListUrl = 'https://api.angel.co/1/tags/14781/jobs?&access_token=c5f37bb9913b8bce889b16dc62ddb51ff2200a4ba38a1c13'
   
 // page=2
 
-// request(url, function (error, response, body) {
-//   if (!error) {
-//     var $ = cheerio.load(body)
-//       // var skills = $('.endorse-item-name-text');
+request(linkedInUrl, function (error, response, body) {
+  if (!error) {
+    var $ = cheerio.load(body)
+      // var skills = $('.endorse-item-name-text');
 
-    
-//      var skills = [];
+     var skills = [];
 
+      $('.endorse-item-name-text').each(function(i, elem) {
+        skills[i] = $(this).text();
+      });
 
-
-//       $('.endorse-item-name-text').each(function(i, elem) {
-//         skills[i] = $(this).text();
-//       });
-
-
-//       console.log(skills.join(', '));
-
+      console.log('Your skills:', skills.join(', '));
       
-//     // console.log("It’s " + temperature + " degrees Fahrenheit.");
-//   } else {
-//     console.log("We’ve encountered an error: " + error);
-//   }
-// });
+  } else {
+    console.log("We’ve encountered an error: " + error);
+  }
+});
 
-request(url, function (error, response, json) {
+request(angelListUrl, function (error, response, json) {
   if (!error && response.statusCode == 200) {
 
     var data = JSON.parse(json);
@@ -73,8 +64,6 @@ request(url, function (error, response, json) {
       position.tags = tagList;
 
       positions.push(position);
-
-
 
     }
 

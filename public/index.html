@@ -2,22 +2,35 @@
 <html ng-app="myApp">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-  <script>
-  var log = function() {
-    console.log('shit')
-  }
-  </script>
+  <title>Do You Have Skills?</title>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-  <script type="text/javascript" src="//platform.linkedin.com/in.js">
-  
-      api_key: 755iz8h7hgzmvf
-      onLoad: log
-  </script>
   <script src="app.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
 </head>
 <body ng-controller="mainController">
-<iframe src="https://angel.co/software-engineering-3" width="200" height="200"></iframe>
+  
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Do you have the skills?</h1>
+    </div>
+
+
+    <linked-in></linked-in>
+    
+    <form>
+      <label for="profile" class="block">LinkedIn profile URL:</label>
+      <input type="text" id="profile" ng-model="url" class="block">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="getLinkedIn()">Submit Profile</button>
+    </form>
+  
+    <form>
+      <!-- <input type="text" id="profile" ng-model="url" class="block"> -->
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="hitAngelList()">Search Angel List</button>
+    </form>
+  </div>
+
   <!--  <button type="submit" ng-click="getData()">Get Data</button> -->
 </body>
 </html>

@@ -1,18 +1,31 @@
 var myApp = angular.module('myApp', []);
 
-myApp.config(function($httpProvider){
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-});
-
 myApp.controller('mainController', function($scope, $http) {
   $scope.data = {};
 
-  $scope.getData = function() {
+  $scope.getLinkedIn = function() {
 
-    $http.get('/linked')
+    $http.post('/linkedin', {
+      'url': $scope.url}
+      )
       .success(function(data) {
-          $scope.data = data;
+
+        console.log('sending post!')
+          // $scope.data.profile = data;
           console.log(data);
+
+      })
+      .error(function(data) {
+          console.log('Error: ' + data);
+      });
+  };
+
+   $scope.hitAngelList = function() {
+
+    $http.get('/angellist')
+      .success(function(data) {
+          // $scope.data = data;
+          console.log('data received!');
       })
       .error(function(data) {
           console.log('Error: ' + data);
@@ -20,3 +33,15 @@ myApp.controller('mainController', function($scope, $http) {
   };
 
 });
+
+myApp.directive('linkedIn', function() {
+  var link = function(scope, element, attr) {
+
+  }
+
+  return {
+    link: link,
+    restrict: 'E',
+    scope: { data: '=' },
+  }
+})

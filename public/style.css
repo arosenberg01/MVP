@@ -1,0 +1,13 @@
+body { 
+  padding-top:50px; 
+}
+
+.jumbotron {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.block {
+  display: block;
+  margin-bottom: 10px;
+}
